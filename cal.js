@@ -23,15 +23,23 @@ if (number === '.' && this.currentOperand.includes('.')) return
 
 
 chooseOperation(operation){
-    
+   if(this.currentOperand === '') return
+   if(this.previousOperand !== '') {
+       this.compute()
+   } 
+   this.operation = operation
+    this.previousOperand = this.currentOperand
+    this.currentOperand = ''
 }
 
 compute() {
-    
+    let computation
+    const prev = parseFloat(this.previousOperand)
 }
 
 updateDisplay() {
     this.currentOperandTextElement.innerText = this.currentOperand
+this.previousOperandTextElement.innerText = this.previousOperand
 }
 
 }
@@ -53,9 +61,11 @@ const calculator = new Calculator(previousOperandTextElement,
         })
     })
 
-    numberButtons.forEach(button => {
+    operationButtons.forEach(button => {
         button.addEventListener('click', () =>{
-            calculator.appendNumber(button.innerText)
+            calculator.chooseOperation(button.innerText)
             calculator.updateDisplay()
         })
     })
+
+    equalsButton.addEventListener('click',button =>)
