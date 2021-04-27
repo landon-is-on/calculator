@@ -58,10 +58,30 @@ this.operation = undefined
 this.previousOperand=''
 }
 
+getDisplayNumber(number) {
+    const stringNumber = number.toString()
+    const integerDigits = parseFloat(stringNumber.split('.'))
+    const decimalDigits = stringNumberstringNumber.split('.')[1]
+    let integerDisplay
+    if(isNaN(intergerDigits)) {
+        integerDigits = ''
+    } else {
+        integerDisplay = integerDigits.toLocaleString('en', {
+            maximumFractionDigits: 0 })
+    }
+if(decimalDigits != null) {
+    return `${integerDisplay}.${decimalDigits}`
+} else {
+    return integerDisplay
+}
+}
+
 updateDisplay() {
     this.currentOperandTextElement.innerText = this.currentOperand
     if(this.operation != null) { 
     this.previousOperandTextElement.innerText = `${this.previousOperand} ${this.operation}`
+    } else {
+        this.previousOperandTextElement.innerText = ''
     }
 }
 }
