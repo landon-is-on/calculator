@@ -13,7 +13,7 @@ this.operation = undefined
 }
 
 delete() {
-
+this.currentOperand = this.currentOperand.toString().slice(0,-1)
 }
 
 appendNumber(number) {
@@ -60,9 +60,10 @@ this.previousOperand=''
 
 updateDisplay() {
     this.currentOperandTextElement.innerText = this.currentOperand
-this.previousOperandTextElement.innerText = this.previousOperand
+    if(this.operation != null) { 
+    this.previousOperandTextElement.innerText = `${this.previousOperand} ${this.operation}`
+    }
 }
-
 }
 const numberButtons = document.querySelectorAll('[data-number]')
 const operationButtons = document.querySelectorAll('[data-operation]')
@@ -91,5 +92,11 @@ const calculator = new Calculator(previousOperandTextElement,
 
     equalsButton.addEventListener('click',button =>{
         calculator.compute()
+        calculator.updateDisplay()
+    })
+
+
+    allClearButton.addEventListener('click',button =>{
+        calculator.clear()
         calculator.updateDisplay()
     })
